@@ -1,0 +1,73 @@
+﻿@model ResumeManager.Models.Applicant
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+<div class="text-end">
+    <a asp-action="Index">Back to List</a>
+</div>
+    <div class="row card-header">
+        <div class="col-sm-4">
+            <label class="col-sm-4 m-2">Name:</label>
+            <span class="display-name col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </span>
+            <br />
+            <label class="col-sm-4 m-2">Gender:</label>
+            <span class="display-name col-sm-10">
+                @Html.DisplayFor(model => model.Gender)
+            </span>
+            <br />
+            <label class="col-sm-4 m-2">Age:</label>
+            <span class="display-name col-sm-10">
+                @Html.DisplayFor(model => model.Age)
+            </span>
+            <br />
+            <label class="col-sm-4 m-2">Qualification:</label>
+            <span class="display-name col-sm-10">
+                @Html.DisplayFor(model => model.Qualification)
+            </span>
+            <br />
+            <label class="col-sm-4 m-2">TotalExperience:</label>
+            <span class="display-name col-sm-10">
+                @Html.DisplayFor(model => model.TotalExperience)
+            </span>
+            <br />
+        </div>
+
+        <div class="col-sm-4">
+            <img src="~/Images/@Model.PhotoUrl" style="width:200px; border-color:blue;" />
+        </div>
+
+        <div class="card-footer Info card">
+<table class="table" id="ExpTable">
+    <thead>
+        <tr>
+            <th>Company Name</th>
+            <th>Designation</th>
+            <th>Years Worked</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Experiences.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Html.EditorFor(e=> e.Experiences[i].CompanyName,new{htmlAttributes= new{@class="form-control"}})
+                </td>
+                <td>
+                    @Html.EditorFor(e=> e.Experiences[i].Designation,new{htmlAttributes= new{@class="form-control"}})
+                </td>
+                <td>
+                    @Html.EditorFor(e=> e.Experiences[i].YearsWorked,new{htmlAttributes= new{@class="form-control"}})
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+</div>
+</div>

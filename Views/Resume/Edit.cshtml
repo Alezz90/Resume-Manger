@@ -1,0 +1,98 @@
+﻿@model ResumeManager.Models.Applicant
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Applicant</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data" id="ApplicantForm">
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <input asp-for="Gender" class="form-control" />
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Qualification" class="control-label"></label>
+                <input asp-for="Qualification" class="form-control" />
+                <span asp-validation-for="Qualification" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalExperience" class="control-label"></label>
+                <input asp-for="TotalExperience" class="form-control " />
+                <span asp-validation-for="TotalExperience" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="custom-file">
+                    <img id="ViewPhoto" src="~/Images/@Model.PhotoUrl" style="width:100px;height:120px;margin-top:5px;" />
+                   <input type="hidden" asp-for="PhotoUrl"/>
+                </div>
+                <span asp-validation-for="ProfilePhoto" clss="text-danger"></span>
+            </div>
+
+            <table class="table" id="ExpTable">
+                <thead>
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Designation</th>
+                        <th>Years Worked</th>
+                        <th>
+                            <button id='btnaddExperience' type="button" class="visible" onclick="AddItem(this)">add</button>
+                            </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Experiences.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                               <input asp-for="@Model.Experiences[i].CompanyName" class="form-control"/>
+                            </td>
+                            <td>
+                                <input asp-for="@Model.Experiences[i].Designation" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="@Model.Experiences[i].YearsWorked" class="form-control" />
+                                <span app-validation-for="@Model.Experiences[i].YearsWorked" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input type="hidden" asp-for="@Model.Experiences[i].IsDeleted"/>
+                                <button id="btnremove-@i" type="button" class="btn btn-sm btn-danger invisible" onclick="DeleteItem(this)">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" />|
+                <input type="button" class="btn btn-primary" value="Back to List" onclick="location.href='@Url.Action("Index", "Resume")'" />
+
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

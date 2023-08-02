@@ -1,0 +1,36 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.head1 {
+    display: block;
+    width: 90%;
+    background-color: aliceblue;
+    border-style: solid;
+    border-color: blue;
+    border-radius: 10px;
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    margin: 10px;
+}
+.display-name{
+    color:blue;
+}
